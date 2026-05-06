@@ -7,402 +7,254 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --red: #ff4d4d;
+            --red: #ff0000;
             --gray: #2d2d2d;
             --white: #ffffff;
             --black: #0a0a0a;
-            --glass: rgba(15, 15, 15, 0.85); /* Darker for better text contrast */
+            --golden: #ffd700;
+            --maroon: #800000;
+            --blue: #0080ff;
+            --rose: #ff007f;
+            --yellow: #ffff00;
+            --orange: #ffa500;
+            --purple: #800080;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--black); color: var(--white); line-height: 1.7; overflow-x: hidden; }
 
-        body {
-            background-color: var(--black);
-            color: var(--white);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* --- Navigation --- */
+        /* Navigation */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.98);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 5%;
-            z-index: 1000;
-            border-bottom: 2px solid var(--gray);
+            position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.95);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; z-index: 1000; border-bottom: 1px solid var(--red);
         }
-
-        .nav-center { display: flex; gap: 25px; }
-        .nav-center a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.95rem;
-            transition: 0.3s;
-        }
+        .nav-center { display: flex; gap: 20px; }
+        .nav-center a { color: var(--white); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
         .nav-center a:hover { color: var(--red); }
+        .discord-btn { width: 48px; }
+        .rules-btn { background: var(--red); color: var(--white); padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; font-size: 0.9rem; }
 
-        .discord-btn img { width: 40px; transition: 0.3s; vertical-align: middle; }
-        .rules-btn {
-            background: var(--red);
-            color: var(--white);
-            padding: 10px 18px;
-            text-decoration: none;
-            font-weight: 800;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            display: inline-block;
-        }
+        /* Sections */
+        section { padding: 100px 5% 50px; }
+        h2 { color: var(--red); margin-bottom: 25px; text-transform: uppercase; text-align: center; }
 
-        /* --- Sections --- */
-        section {
-            min-height: 100vh;
-            padding: 120px 5% 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* --- Home --- */
-        #home { text-align: center; justify-content: center; }
-        .hero-main {
-            color: var(--red);
-            font-size: clamp(3rem, 10vw, 6rem);
-            text-shadow: 0 0 30px rgba(255, 77, 77, 0.8);
-            margin-bottom: 5px;
-            font-weight: 800;
-        }
-        .hero-sub {
-            color: var(--white);
-            font-size: 1.4rem;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-            letter-spacing: 3px;
-            font-weight: 400;
-        }
-
-        /* --- Smart Table Containers --- */
+        /* Boxes */
         .content-box {
-            width: 100%;
-            max-width: 1100px;
-            position: relative;
-            background: var(--glass);
-            border: 2px solid var(--gray);
-            border-radius: 18px;
-            padding: 40px;
-            margin-bottom: 50px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-            opacity: 0;
-            transform: translateY(30px);
+            width: 100%; max-width: 1000px; margin: 0 auto 50px; background: rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; position: relative; overflow: hidden;
         }
+        .bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.2; z-index: 0; }
+        .content-inner { position: relative; z-index: 1; }
 
-        .content-box.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: rgba(0,0,0,0.4); }
+        th { background: rgba(255,0,0,0.3); padding: 12px; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        
+        /* Notes & Highlights */
+        .note { margin-top: 15px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; font-size: 0.9rem; border: 1px solid var(--red); }
+        .text-orange { color: var(--orange); font-weight: bold; }
+        .text-purple { color: var(--purple); font-weight: bold; }
+        .text-blue { color: var(--blue); font-weight: bold; }
+        .text-red { color: var(--red); font-weight: bold; }
+        .text-mandatory { color: var(--red); font-weight: bold; }
 
-        /* The background image constrained to the box */
-        .box-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.15;
-            z-index: -1;
-            pointer-events: none;
-        }
+        /* Seasons & Slider */
+        .seasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .season-card { cursor: pointer; border: 2px solid var(--white); border-radius: 15px; overflow: hidden; transition: 0.3s; }
+        .season-card:hover { transform: scale(1.02); }
+        .season-card img { width: 100%; display: block; }
+        .slider { display: flex; gap: 20px; overflow-x: auto; padding: 20px 0; }
+        .card { min-width: 250px; cursor: pointer; border-radius: 15px; overflow: hidden; border: 1px solid var(--gray); }
+        .card img { width: 100%; }
 
-        h2 {
-            color: var(--red);
-            font-size: 2rem;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            border-left: 5px solid var(--red);
-            padding-left: 15px;
-        }
+        /* Leadership */
+        .leader-img { width: 140px; height: 140px; border-radius: 15px; border: 3px solid var(--red); object-fit: cover; margin: 10px 0; }
+        .admin-row { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 30px; }
+        .admin-card { text-align: center; width: 150px; }
+        
+        /* Glows */
+        .glow-golden { color: var(--golden); text-shadow: 0 0 10px var(--golden), 0 0 20px var(--golden), 0 0 30px var(--golden); }
+        .glow-maroon { color: var(--maroon); text-shadow: 0 0 10px var(--maroon), 0 0 20px var(--maroon); }
+        .glow-blue { color: var(--blue); text-shadow: 0 0 10px var(--blue), 0 0 20px var(--blue); }
+        .glow-rose { color: var(--rose); text-shadow: 0 0 10px var(--rose), 0 0 20px var(--rose); }
+        .glow-yellow { color: var(--yellow); text-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow); }
+        .role-title { font-weight: 800; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 5px; }
 
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 10px;
-            font-size: 1.05rem;
-        }
-
-        th {
-            color: var(--red);
-            text-align: left;
-            padding: 15px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        td {
-            padding: 18px;
-            background: rgba(255,255,255,0.03);
-        }
-
-        tr td:first-child { border-radius: 10px 0 0 10px; font-weight: 700; color: var(--red); }
-        tr td:last-child { border-radius: 0 10px 10px 0; }
-
-        .note {
-            background: rgba(255, 77, 77, 0.15);
-            border: 1px solid var(--red);
-            padding: 20px;
-            margin-top: 25px;
-            border-radius: 12px;
-            font-size: 1rem;
-        }
-
-        .highlight-red { color: var(--red); font-weight: 800; }
-        .highlight-orange { color: #ff9800; font-weight: 700; }
-        .highlight-purple { color: #e040fb; font-weight: 700; }
-        .highlight-blue { color: #00e5ff; font-weight: 700; }
-
-        /* --- Swiping Cards --- */
-        .slider {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            width: 100%;
-            padding: 20px 0;
-            scrollbar-width: thin;
-        }
-
-        .card {
-            min-width: 320px;
-            height: 450px;
-            background: var(--gray);
-            border-radius: 20px;
-            position: relative;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: 0.3s;
-            overflow: hidden;
-        }
-
-        .card:hover { border-color: var(--red); transform: scale(1.02); }
-        .card img { width: 100%; height: 100%; object-fit: cover; }
-        .card-title {
-            position: absolute;
-            bottom: 0; width: 100%;
-            padding: 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            font-weight: 800;
-        }
-
-        /* --- Overlay (Discord-style) --- */
-        #overlay {
-            position: fixed;
-            top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 3000;
-        }
-        #overlay img { max-width: 90%; max-height: 85%; border: 2px solid var(--gray); }
-        .close-btn { position: absolute; top: 30px; right: 40px; font-size: 3rem; color: var(--red); cursor: pointer; }
-
-        /* --- Leadership Grid --- */
-        .leader-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 30px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .leader-img {
-            width: 140px; height: 140px;
-            border-radius: 15px; /* Square rounded */
-            border: 3px solid var(--red);
-            margin-bottom: 15px;
-            object-fit: cover;
-        }
-
-        @media (max-width: 768px) {
-            .nav-center { display: none; } /* Add burger menu or simplify for mobile */
-            .content-box { padding: 20px; }
-            td, th { padding: 10px; font-size: 0.9rem; }
-        }
+        .overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div>
-            <a href="https://discord.gg/vpCbnSjW2j" class="discord-btn" target="_blank">
-                <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/icons8-discord-48.png" alt="Discord">
-            </a>
-        </div>
+        <a href="https://discord.gg/vpCbnSjW2j" target="_blank"><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/icons8-discord-48.png" class="discord-btn"></a>
         <div class="nav-center">
             <a href="#home">Home</a>
+            <a href="#seasons">Seasons</a>
             <a href="#events">Events</a>
             <a href="#development">Development</a>
             <a href="#graphics">Graphics</a>
             <a href="#leadership">Leadership</a>
         </div>
-        <div><a href="#rules" class="rules-btn">ALLIANCE RULES</a></div>
+        <a href="javascript:void(0)" class="rules-btn" onclick="alert('ALLIANCE RULES:\n1. Speak with respect to all members\n2. Donate to alliance tech daily\n3. No farming on TDTE, RSN1, MENA\n4. Avoid world chat drama at all costs')">Rules</a>
     </nav>
 
-    <section id="home">
-        <h1 class="hero-main">LAST Z PLAYER GUIDE</h1>
-        <p class="hero-sub">play smart , win consistently</p>
+    <section id="home" style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1 style="color: var(--red); font-size: 4rem; text-shadow: 0 0 20px var(--red);">LAST Z PLAYER GUIDE</h1>
+        <p style="font-size: 1.5rem; text-shadow: 0 0 10px var(--white);">play smart , win consistently</p>
+    </section>
+
+    <section id="seasons">
+        <h2>Seasons</h2>
+        <div class="seasons-grid">
+            <div class="season-card" onclick="window.location.href='https://wembiii.github.io/wolfteamLZ/#home'"><img src="https://raw.githubusercontent.com/wembiii/wolfteamLZarabic/refs/heads/main/ChatGPT%20Image%20May%206%2C%202026%2C%2001_37_30%20PM.png"></div>
+            <div class="season-card" onclick="window.location.href='https://lastzwiki.com/en/season-3.html'"><img src="https://raw.githubusercontent.com/wembiii/wolfteamLZarabic/refs/heads/main/ChatGPT%20Image%20May%206%2C%202026%2C%2001_40_03%20PM.png"></div>
+            <div class="season-card" onclick="window.location.href='https://lastzwiki.com/en/season-4.html'"><img src="https://raw.githubusercontent.com/wembiii/wolfteamLZarabic/refs/heads/main/ChatGPT%20Image%20May%206%2C%202026%2C%2001_39_29%20PM.png"></div>
+            <div class="season-card" onclick="document.getElementById('lightbox').style.display='flex'; document.getElementById('lb-img').src='https://raw.githubusercontent.com/wembiii/wolfteamLZarabic/refs/heads/main/vddvdv.jpg'"><img src="https://raw.githubusercontent.com/wembiii/wolfteamLZarabic/refs/heads/main/ChatGPT%20Image%20May%206%2C%202026%2C%2001_41_30%20PM.png"></div>
+        </div>
     </section>
 
     <section id="events">
         <div class="content-box">
-            <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/full%20preparedness.png" class="box-bg">
-            <h2>Full Preparedness</h2>
-            <table>
-                <thead>
+            <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/full%20preparedness.png" class="bg-img">
+            <div class="content-inner">
+                <h2>Full Preparedness</h2>
+                <table>
                     <tr><th>TOPIC</th><th>POINT SOURCE (6PTS EACH)</th><th>SUMMARY</th></tr>
-                </thead>
-                <tbody>
                     <tr><td>Mod vehicle</td><td>15 daily boomers</td><td>Save wrenches / blueprints at all cost for monday. Only do boomers/zombies</td></tr>
                     <tr><td>Shelter upgrade</td><td>Building speed ups</td><td>Only do if its mandatory, if its not save all the speed ups for Tuesday</td></tr>
                     <tr><td>Age of Science</td><td>Research speed ups</td><td>Only do if its mandatory, if its not save all the speed ups for Wednesday</td></tr>
                     <tr><td>Army expantion</td><td>Troop training</td><td>Do this daily but save the speed ups for friday as much as you can</td></tr>
                     <tr><td>Hero initiative</td><td>Hero exp</td><td>Do this daily but avoid spending too much if you cant reach #1 in full preparedness</td></tr>
-                </tbody>
-            </table>
-            <div class="note">
-                <span class="highlight-red">NOTE :</span> You need 18 points to reach the final reward on fullpreparedness so focus on the tasks that give you points that doesnt effect your alliance duel progress like ( Army expansion , Hero initiative , Mod vehicle )
+                </table>
+                <div class="note">NOTE : You need 18 points to reach the final reward on fullpreparedness so focus on the tasks that give you points that doesnt effect your alliance duel progress like ( Army expansion , Hero initiative , Mod vehicle )</div>
             </div>
         </div>
 
         <div class="content-box">
-            <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Dynamic%20VS%20logo%20with%20vibrant%20sparks.png" class="box-bg">
-            <h2>Alliance Duel</h2>
-            <table>
-                <thead>
+            <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Dynamic%20VS%20logo%20with%20vibrant%20sparks.png" class="bg-img">
+            <div class="content-inner">
+                <h2>Alliance Duel</h2>
+                <table>
                     <tr><th>DAY</th><th>TOPIC</th><th>MUST DO</th><th>WHAT GIVES POINTS</th></tr>
-                </thead>
-                <tbody>
                     <tr><td>Monday</td><td>Modded Vehicle Boost</td><td>start saving radar events 1 ½ day before monday</td><td>Blueprints , Wrenches , Boomers , Zombies , Radar events , Modified Vehicle component box</td></tr>
-                    <tr><td>Tuesday</td><td>Shelter Upgrade</td><td>Instead of completing the builds, you can keep them on hold until Tuesday to earn points through Structure Power</td><td>Building speed ups , Recruit Refugees, <span class="highlight-orange">Orange</span> Bounty missions</td></tr>
-                    <tr><td>Wednesday</td><td>Age of Science</td><td>Save research badges for this day</td><td>Research speed ups, Badges, escort <span class="highlight-orange">Orange</span> trucks</td></tr>
-                    <tr><td>Thursday</td><td>Hero Initiative</td><td>save hero fragments / power cores as much as you can for this day</td><td><span class="highlight-orange">Orange</span>/<span class="highlight-purple">Purple</span>/<span class="highlight-blue">Blue</span> fragments , Power cores , Enhancements alloys , Prime Recruitment tickets, <span class="highlight-orange">Orange</span> skill books</td></tr>
+                    <tr><td>Tuesday</td><td>Shelter Upgrade</td><td>Hold builds until Tuesday to earn points through Structure Power</td><td>Building speed ups , Recruit Refugees, <span class="text-orange">Orange</span> Bounty missions</td></tr>
+                    <tr><td>Wednesday</td><td>Age of Science</td><td>Save research badges for this day</td><td>Research speed ups, Badges, escort <span class="text-orange">Orange</span> trucks</td></tr>
+                    <tr><td>Thursday</td><td>Hero Initiative</td><td>Save fragments / power cores for this day</td><td><span class="text-orange">Orange</span>/<span class="text-purple">Purple</span>/<span class="text-blue">Blue</span> fragments , Power cores , Enhancements alloys , Prime Recruitment tickets, <span class="text-orange">Orange</span> skill books</td></tr>
                     <tr><td>Friday</td><td>Holistic Growth</td><td>Must start saving radar 2 days before this day</td><td>Training speed ups , Radar events</td></tr>
-                    <tr><td>Saturday</td><td>Enemy buster</td><td>SHIELD UP IF YOU’RE INACTIVE DURING THE DAY</td><td>Defeat T7 to T10 units, escort <span class="highlight-orange">orange</span> trucks</td></tr>
-                </tbody>
-            </table>
-            <div class="note"><span class="highlight-red">NOTE :</span> on Tuesday / Wednesday / Friday its recommended to use the speed ups based on the time you have the full prepardness event</div>
+                    <tr><td>Saturday</td><td>Enemy buster</td><td>SHIELD UP IF YOU’RE INACTIVE DURING THE DAY</td><td>Defeat T7 to T10 units, escort <span class="text-orange">Orange</span> trucks</td></tr>
+                </table>
+                <div class="note">NOTE : on Tuesday / Wednesday / Friday its recommended to use the speed ups based on the time you have the full prepardness event</div>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h2>Monthly Event Cycle</h2>
+            <ul>
+                <li>1st week (Fragments based events) -> Spin wheel / Camilla’s Shop / Champion duel</li>
+                <li>2nd week ( Tank upgrade based events) -> Gacha GO / Dawn’s Light</li>
+                <li>3rd week ( Eqiupment based events) -> Bullseye Booty</li>
+                <li>4th week ( Research Badge / Fuel / Speed ups based) -> Lucky Discounter</li>
+            </ul>
         </div>
     </section>
 
     <section id="development">
         <div class="content-box">
-            <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/ChatGPT%20Image%20Mar%2021%2C%202026%2C%2006_46_37%20AM%20(1).png" class="box-bg">
-            <h2>Ways to get Hero Fragments Weekly</h2>
-            <ul style="list-style: none;">
-                <li>- Danger Lurks ( rally Boomers ): <span class="highlight-orange">x1 Orange fragment</span> / <span class="highlight-purple">x5 Purple fragments</span> -> DAILY</li>
-                <li>- Full preparedness ( final reward) : <span class="highlight-orange">x2 Orange fragments</span> / <span class="highlight-purple">x7 Purple Fragments</span> -DAILY</li>
-                <li>- Weekly gifting reward (go to profile > gift icon) : <span class="highlight-orange">x6 Orange fragments</span> -> WEEKLY</li>
-                <li>- Saga Zombies (level 9) : <span class="highlight-orange">x24 Orange Fragments</span> -> WEEKYLY</li>
-                <li>- Glory shop : <span class="highlight-orange">x10 Orange Fragments</span> -> WEEKLY</li>
-                <li>- Orange / Purple trucks : <span class="highlight-orange">x4 ~ x12 Orange Fragments</span> -> DAILY</li>
-            </ul>
+            <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/ChatGPT%20Image%20Mar%2021%2C%202026%2C%2006_46_37%20AM%20(1).png" class="bg-img">
+            <div class="content-inner">
+                <h2>Ways to get hero fragments weekly</h2>
+                <ul>
+                    <li>Dannger Lurks ( rally Boomers ): <span class="text-orange">x1 Orange fragment</span> / <span class="text-purple">x5 Purple fragments</span> -> DAILY</li>
+                    <li>Full preparedness ( final reward) : <span class="text-orange">x2 Orange fragments</span> / <span class="text-purple">x7 Purple Fragments</span> -DAILY</li>
+                    <li>Weekly gifting reward : <span class="text-orange">x6 Orange fragments</span> -> WEEKLY</li>
+                    <li>Saga Zombies (level 9) : <span class="text-orange">x24 Orange Fragments</span> -> WEEKYLY</li>
+                    <li>Glory shop : <span class="text-orange">x10 Orange Fragments</span> -> WEEKLY</li>
+                    <li>Orange / Purple trucks : <span class="text-orange">x4 ~ x12 Orange Fragments</span> -> DAILY</li>
+                </ul>
+            </div>
         </div>
-
         <div class="content-box">
-            <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Futuristic%20research%20facility%20with%20geodesic%20dome.png" class="box-bg">
-            <h2>Research Priority</h2>
-            <ol style="margin-left: 20px; font-weight: 600;">
-                <li>New Home</li><li>Elite troops</li><li>Hero training</li><li>HQ management</li><li>Military strategies</li><li>Peace shield</li><li>Seige to Seize</li>
-            </ol>
-            <div class="note">
-                <span class="highlight-red">NOTE :</span> <span class="highlight-blue">ALLIANCE RECOGNITION</span> is <span class="highlight-red">mandatory</span>. Keep it developing while you’re doing other research. Don't ignore it—it gives massive rewards once MAXed out.
+            <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Futuristic%20research%20facility%20with%20geodesic%20dome.png" class="bg-img">
+            <div class="content-inner">
+                <h2>Research Priority</h2>
+                <ol style="margin-left: 20px;">
+                    <li>New Home</li><li>Elite troops</li><li>Hero training</li><li>HQ management</li><li>Military strategies</li><li>Peace shield</li><li>Seige to Seize</li>
+                </ol>
+                <div class="note">NOTE : <span class="text-blue">ALLIANCE RECOGNITION</span> is <span class="text-mandatory">mandatory</span> keep it developing while you’re doing other research too. Dont ignore alliance recognition since it can give you alot of rewards once you MAX it out</div>
             </div>
         </div>
     </section>
 
     <section id="graphics">
-        <h2 style="width: 100%; max-width: 1100px;">Game Graphics</h2>
+        <h2>Graphics</h2>
         <div class="slider">
-            <div class="card" onclick="openImg(this.querySelector('img').src)">
-                <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Zombie%20seige.png">
-                <div class="card-title">Zombie seige</div>
-            </div>
-            <div class="card" onclick="openImg(this.querySelector('img').src)">
-                <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/alliance%20duel%20full.png">
-                <div class="card-title">Alliance duel</div>
-            </div>
-            <div class="card" onclick="openImg(this.querySelector('img').src)">
-                <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/development.png">
-                <div class="card-title">Development</div>
-            </div>
-            <div class="card" onclick="openImg(this.querySelector('img').src)">
-                <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/furylord.png">
-                <div class="card-title">Max Furylord Damage</div>
-            </div>
-            <div class="card" onclick="openImg(this.querySelector('img').src)">
-                <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/state%20ruler%202.png">
-                <div class="card-title">State ruler guide</div>
-            </div>
+            <div class="card" onclick="document.getElementById('lightbox').style.display='flex'; document.getElementById('lb-img').src=this.querySelector('img').src"><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Zombie%20seige.png"></div>
+            <div class="card" onclick="document.getElementById('lightbox').style.display='flex'; document.getElementById('lb-img').src=this.querySelector('img').src"><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/alliance%20duel%20full.png"></div>
+            <div class="card" onclick="document.getElementById('lightbox').style.display='flex'; document.getElementById('lb-img').src=this.querySelector('img').src"><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/development.png"></div>
+            <div class="card" onclick="document.getElementById('lightbox').style.display='flex'; document.getElementById('lb-img').src=this.querySelector('img').src"><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/furylord.png"></div>
+            <div class="card" onclick="document.getElementById('lightbox').style.display='flex'; document.getElementById('lb-img').src=this.querySelector('img').src"><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/state%20ruler%202.png"></div>
         </div>
-        <p style="margin-top: 20px; opacity: 0.6;">made by Trayola <3</p>
+        <p style="text-align: center; margin-top: 20px;">made by Trayola <3</p>
     </section>
 
     <section id="leadership">
-        <div class="content-box" style="background: rgba(0,0,0,0.6);">
-            <h2>Leadership Team</h2>
-            <div class="leader-grid">
-                <div style="grid-column: 1 / -1; margin-bottom: 30px;">
-                    <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Trayola.PNG" class="leader-img" style="width: 180px; height: 180px;">
-                    <h3>(R5) Trayola</h3>
+        <h2>Leadership</h2>
+        <div class="content-box" style="text-align: center;">
+            <div style="margin-bottom: 50px;">
+                <div class="role-title glow-golden">LEADER</div>
+                <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Trayola.PNG" class="leader-img">
+                <div style="font-weight: bold; font-size: 1.1rem;">Trayola</div>
+            </div>
+
+            <div class="admin-row">
+                <div class="admin-card">
+                    <div class="role-title glow-maroon">Warlord</div>
+                    <img src="https://raw.githubusercontent.com/wembiii/wolfteamLZ/refs/heads/main/whoiska%20warlord.PNG" class="leader-img">
+                    <div style="font-weight: bold;">WhoisKA</div>
                 </div>
-                <div><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Huning.PNG" class="leader-img"><p>(Warlord) Huning</p></div>
-                <div><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Mi-reh%20-%20RECRUITER.PNG" class="leader-img"><p>(Recruiter) Mi-reh</p></div>
-                <div><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/VALQUIRIA.PNG" class="leader-img"><p>(Muse) VALQUIRIA-</p></div>
-                <div><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Despotic%20Dave%20-%20BUTLER.PNG" class="leader-img"><p>(Butler) Despotic dave</p></div>
-                <div><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Hogwild.PNG" class="leader-img"><p>HogWild</p></div>
-                <div><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Scrummy.PNG" class="leader-img"><p>Scrummy31</p></div>
-                <div><img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/SHA227.PNG" class="leader-img"><p>SHA227</p></div>
+                <div class="admin-card">
+                    <div class="role-title glow-blue">Recruiter</div>
+                    <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Scrummy.PNG" class="leader-img">
+                    <div style="font-weight: bold;">Scrummy31</div>
+                </div>
+                <div class="admin-card">
+                    <div class="role-title glow-rose">Muse</div>
+                    <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/VALQUIRIA.PNG" class="leader-img">
+                    <div style="font-weight: bold;">VALQUIRIA-</div>
+                </div>
+                <div class="admin-card">
+                    <div class="role-title glow-yellow">Butler</div>
+                    <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Despotic%20Dave%20-%20BUTLER.PNG" class="leader-img">
+                    <div style="font-weight: bold;">Despotic dave</div>
+                </div>
+            </div>
+
+            <div class="admin-row">
+                <div class="admin-card">
+                    <img src="https://raw.githubusercontent.com/wembiii/wolfteamLZ/refs/heads/main/Paliko.PNG" class="leader-img">
+                    <div style="font-weight: bold;">Paliko</div>
+                </div>
+                <div class="admin-card">
+                    <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/Mi-reh%20-%20RECRUITER.PNG" class="leader-img">
+                    <div style="font-weight: bold;">Mi-reh</div>
+                </div>
+                <div class="admin-card">
+                    <img src="https://raw.githubusercontent.com/25Hzblade/torrous.github.io/refs/heads/main/SHA227.PNG" class="leader-img">
+                    <div style="font-weight: bold;">SHA227</div>
+                </div>
+                <div class="admin-card">
+                    <img src="https://raw.githubusercontent.com/wembiii/wolfteamLZ/refs/heads/main/mahmoud.PNG" class="leader-img">
+                    <div style="font-weight: bold;">Mahmoud12</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <div id="overlay">
-        <span class="close-btn" onclick="closeImg()">&times;</span>
-        <img id="overlay-img" src="">
+    <div class="overlay" id="lightbox" onclick="this.style.display='none'">
+        <img id="lb-img" style="max-width:90%; max-height:80%; border-radius:15px; border:2px solid white;">
     </div>
 
-    <script>
-        // Smooth scroll reveal animation
-        const obsOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, obsOptions);
-
-        document.querySelectorAll('.content-box').forEach(box => observer.observe(box));
-
-        // Image Viewer
-        function openImg(src) {
-            document.getElementById('overlay-img').src = src;
-            document.getElementById('overlay').style.display = 'flex';
-        }
-        function closeImg() {
-            document.getElementById('overlay').style.display = 'none';
-        }
-    </script>
 </body>
 </html>
